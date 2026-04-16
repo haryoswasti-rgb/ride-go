@@ -33,6 +33,21 @@ export default function Peminjaman() {
   const [editApprovalCarId, setEditApprovalCarId] = useState("");
   const [editApprovalStatus, setEditApprovalStatus] = useState<"pending" | "approved" | "rejected">("pending");
 
+  // Admin password protection
+  const [adminAuthDialog, setAdminAuthDialog] = useState(false);
+  const [pendingAdminAction, setPendingAdminAction] = useState<(() => void) | null>(null);
+
+  const requireAdmin = (action: () => void) => {
+    setPendingAdminAction(() => action);
+    setAdminAuthDialog(true);
+  };
+
+  const handleAdminVerified = () => {
+    setAdminAuthDialog(false);
+    pendingAdminAction?.();
+    setPendingAdminAction(null);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.borrowerName || !form.teamName || !form.keperluan || !form.startDate || !form.endDate) {
