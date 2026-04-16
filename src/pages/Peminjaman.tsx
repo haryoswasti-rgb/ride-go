@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, XCircle, Clock, Car, Pencil } from "lucide-react";
+import AdminPasswordDialog from "@/components/AdminPasswordDialog";
 
 export default function Peminjaman() {
   const { toast } = useToast();
