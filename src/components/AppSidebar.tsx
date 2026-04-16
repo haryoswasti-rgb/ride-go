@@ -42,7 +42,7 @@ export default function AppSidebar() {
         })}
       </nav>
       <div className="p-4 border-t border-sidebar-border">
-        <p className="text-xs text-sidebar-muted text-center">© 2026 BPS Provinsi Tengah</p>
+        <p className="text-xs text-sidebar-muted text-center">© 2026 CLARA</p>
       </div>
     </aside>
   );
