@@ -1,7 +1,8 @@
-import innovaImg from "@/assets/innova.jpg";
-import teriosImg from "@/assets/terios.jpg";
-import xeniaImg from "@/assets/xenia.jpg";
-import pantherImg from "@/assets/panther.jpg";
+import innova02Img from "@/assets/innova-02.jpeg";
+import innova05Img from "@/assets/innova-05.avif";
+import teriosImg from "@/assets/terios.jpeg";
+import xeniaImg from "@/assets/xenia.jpeg";
+import pantherImg from "@/assets/panther.jpeg";
 
 export interface Car {
   id: string;
@@ -27,8 +28,8 @@ export interface Booking {
 }
 
 export const cars: Car[] = [
-  { id: "innova-02", name: "Toyota Innova 02", image: innovaImg, capacity: 7, type: "MPV" },
-  { id: "innova-05", name: "Toyota Innova 05", image: innovaImg, capacity: 7, type: "MPV" },
+  { id: "innova-02", name: "Toyota Innova 02", image: innova02Img, capacity: 7, type: "MPV" },
+  { id: "innova-05", name: "Toyota Innova 05", image: innova05Img, capacity: 7, type: "MPV" },
   { id: "terios-1", name: "Daihatsu Terios", image: teriosImg, capacity: 7, type: "SUV" },
   { id: "xenia-1", name: "Daihatsu Xenia", image: xeniaImg, capacity: 7, type: "MPV" },
   { id: "panther-1", name: "Isuzu Panther", image: pantherImg, capacity: 8, type: "MPV" },
