@@ -1,5 +1,5 @@
 import innova02Img from "@/assets/innova-02.jpeg";
-import innova05Img from "@/assets/innova-05.avif";
+import innova05Img from "@/assets/innova-05.jpeg";
 import teriosImg from "@/assets/terios.jpeg";
 import xeniaImg from "@/assets/xenia.jpeg";
 import pantherImg from "@/assets/panther.jpeg";
