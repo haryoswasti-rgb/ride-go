@@ -52,6 +52,7 @@ export default function Peminjaman() {
 
   const [adminAuthDialog, setAdminAuthDialog] = useState(false);
   const [pendingAdminAction, setPendingAdminAction] = useState<(() => void | Promise<void>) | null>(null);
+  const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; booking: Booking | null }>({ open: false, booking: null });
 
   const resolveCarName = (carId: string, fallback?: string) => fallback || cars.find((car) => car.id === carId)?.name || "";
 
