@@ -260,7 +260,7 @@ export default function Peminjaman() {
                         <td className="p-3 text-muted-foreground">{booking.teamName}</td>
                         <td className="p-3 text-muted-foreground max-w-[150px] truncate">{booking.keperluan}</td>
                         <td className="p-3 text-muted-foreground whitespace-nowrap">{booking.startDate} — {booking.endDate}</td>
-                        <td className="p-3 text-muted-foreground whitespace-nowrap">{booking.startTime} — {booking.endTime}</td>
+                        <td className="p-3 text-muted-foreground whitespace-nowrap">{formatTime24(booking.startTime)} — {formatTime24(booking.endTime)} WIB</td>
                         <td className="p-3 text-muted-foreground">
                           <span className="flex items-center gap-2">
                             <Car className="w-4 h-4" /> {carName}
