@@ -6,6 +6,7 @@ import {
   saveBookingToSheet,
   updateBookingOnSheet,
   updateBookingStatusOnSheet,
+  deleteBookingOnSheet,
   type Booking,
 } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -13,9 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, XCircle, Clock, Car, Pencil } from "lucide-react";
+import { CheckCircle, XCircle, Clock, Car, Pencil, Trash2 } from "lucide-react";
 import AdminPasswordDialog from "@/components/AdminPasswordDialog";
 
 function formatTime24(value?: string): string {
