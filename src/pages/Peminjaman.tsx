@@ -18,6 +18,14 @@ import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, XCircle, Clock, Car, Pencil } from "lucide-react";
 import AdminPasswordDialog from "@/components/AdminPasswordDialog";
 
+function formatTime24(value?: string): string {
+  if (!value) return "—";
+  const match = value.trim().match(/^(\d{1,2})[:.](\d{2})/);
+  if (!match) return value;
+  const hours = String(Math.min(23, parseInt(match[1], 10))).padStart(2, "0");
+  return `${hours}:${match[2]}`;
+}
+
 export default function Peminjaman() {
   const { toast } = useToast();
   const [bookings, setBookings] = useState<Booking[]>(getBookings());
