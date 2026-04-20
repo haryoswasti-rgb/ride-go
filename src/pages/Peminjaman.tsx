@@ -183,7 +183,20 @@ export default function Peminjaman() {
     );
   };
 
-  const statusIcon = (status: string) => {
+  const handleDeleteConfirm = async () => {
+    if (!deleteDialog.booking) return;
+    const success = await deleteBookingOnSheet(deleteDialog.booking.id);
+    await refreshBookings();
+    setDeleteDialog({ open: false, booking: null });
+
+    toast(
+      success
+        ? { title: "Dihapus", description: "Data peminjaman berhasil dihapus dari spreadsheet" }
+        : { title: "Sinkronisasi gagal", description: "Data lokal terhapus, tetapi spreadsheet gagal diperbarui", variant: "destructive" }
+    );
+  };
+
+
     if (status === "approved") return <CheckCircle className="w-4 h-4 text-success" />;
     if (status === "rejected") return <XCircle className="w-4 h-4 text-destructive" />;
     return <Clock className="w-4 h-4 text-warning" />;
