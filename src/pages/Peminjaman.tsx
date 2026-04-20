@@ -18,6 +18,14 @@ import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, XCircle, Clock, Car, Pencil } from "lucide-react";
 import AdminPasswordDialog from "@/components/AdminPasswordDialog";
 
+function formatTime24(value?: string): string {
+  if (!value) return "—";
+  const match = value.trim().match(/^(\d{1,2})[:.](\d{2})/);
+  if (!match) return value;
+  const hours = String(Math.min(23, parseInt(match[1], 10))).padStart(2, "0");
+  return `${hours}:${match[2]}`;
+}
+
 export default function Peminjaman() {
   const { toast } = useToast();
   const [bookings, setBookings] = useState<Booking[]>(getBookings());
@@ -260,7 +268,7 @@ export default function Peminjaman() {
                         <td className="p-3 text-muted-foreground">{booking.teamName}</td>
                         <td className="p-3 text-muted-foreground max-w-[150px] truncate">{booking.keperluan}</td>
                         <td className="p-3 text-muted-foreground whitespace-nowrap">{booking.startDate} — {booking.endDate}</td>
-                        <td className="p-3 text-muted-foreground whitespace-nowrap">{booking.startTime} — {booking.endTime}</td>
+                        <td className="p-3 text-muted-foreground whitespace-nowrap">{formatTime24(booking.startTime)} — {formatTime24(booking.endTime)} WIB</td>
                         <td className="p-3 text-muted-foreground">
                           <span className="flex items-center gap-2">
                             <Car className="w-4 h-4" /> {carName}
