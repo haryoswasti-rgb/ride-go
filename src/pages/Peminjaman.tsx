@@ -196,7 +196,7 @@ export default function Peminjaman() {
     );
   };
 
-
+  const statusIcon = (status: string) => {
     if (status === "approved") return <CheckCircle className="w-4 h-4 text-success" />;
     if (status === "rejected") return <XCircle className="w-4 h-4 text-destructive" />;
     return <Clock className="w-4 h-4 text-warning" />;
