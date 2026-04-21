@@ -25,6 +25,7 @@ export default function Peminjaman() {
   const [form, setForm] = useState({
     borrowerName: "",
     teamName: "",
+    anggotaTim: "",
     keperluan: "",
     startDate: "",
     endDate: "",
@@ -36,7 +37,7 @@ export default function Peminjaman() {
   const [selectedCarId, setSelectedCarId] = useState("");
 
   const [editDialog, setEditDialog] = useState<{ open: boolean; booking: Booking | null }>({ open: false, booking: null });
-  const [editForm, setEditForm] = useState({ borrowerName: "", teamName: "", keperluan: "", startDate: "", endDate: "", startTime: "", endTime: "" });
+  const [editForm, setEditForm] = useState({ borrowerName: "", teamName: "", anggotaTim: "", keperluan: "", startDate: "", endDate: "", startTime: "", endTime: "" });
 
   const [editApprovalDialog, setEditApprovalDialog] = useState<{ open: boolean; booking: Booking | null }>({ open: false, booking: null });
   const [editApprovalCarId, setEditApprovalCarId] = useState("");
@@ -77,7 +78,7 @@ export default function Peminjaman() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.borrowerName || !form.teamName || !form.keperluan || !form.startDate || !form.endDate) {
+    if (!form.borrowerName || !form.teamName || !form.anggotaTim || !form.keperluan || !form.startDate || !form.endDate) {
       toast({ title: "Error", description: "Semua field harus diisi", variant: "destructive" });
       return;
     }
@@ -93,7 +94,7 @@ export default function Peminjaman() {
 
     const success = await saveBookingToSheet(booking);
     await refreshBookings();
-    setForm({ borrowerName: "", teamName: "", keperluan: "", startDate: "", endDate: "", startTime: "08:00", endTime: "17:00" });
+    setForm({ borrowerName: "", teamName: "", anggotaTim: "", keperluan: "", startDate: "", endDate: "", startTime: "08:00", endTime: "17:00" });
 
     toast(
       success
@@ -145,7 +146,7 @@ export default function Peminjaman() {
   };
 
   const openEditForm = (booking: Booking) => {
-    setEditForm({ borrowerName: booking.borrowerName, teamName: booking.teamName, keperluan: booking.keperluan, startDate: booking.startDate, endDate: booking.endDate, startTime: booking.startTime, endTime: booking.endTime });
+    setEditForm({ borrowerName: booking.borrowerName, teamName: booking.teamName, anggotaTim: booking.anggotaTim || "", keperluan: booking.keperluan, startDate: booking.startDate, endDate: booking.endDate, startTime: booking.startTime, endTime: booking.endTime });
     setEditDialog({ open: true, booking });
   };
 
@@ -252,6 +253,10 @@ export default function Peminjaman() {
           <div className="space-y-2">
             <Label>Nama Tim</Label>
             <Input value={form.teamName} onChange={(e) => setForm({ ...form, teamName: e.target.value })} placeholder="Nama tim/bidang" />
+          </div>
+          <div className="space-y-2">
+            <Label>Anggota Tim</Label>
+            <Input value={form.anggotaTim} onChange={(e) => setForm({ ...form, anggotaTim: e.target.value })} placeholder="Nama anggota tim" />
           </div>
           <div className="space-y-2">
             <Label>Keperluan</Label>
@@ -379,6 +384,7 @@ export default function Peminjaman() {
           <div className="space-y-3">
             <div><Label>Nama Peminjam</Label><Input value={editForm.borrowerName} onChange={(e) => setEditForm({ ...editForm, borrowerName: e.target.value })} /></div>
             <div><Label>Nama Tim</Label><Input value={editForm.teamName} onChange={(e) => setEditForm({ ...editForm, teamName: e.target.value })} /></div>
+            <div><Label>Anggota Tim</Label><Input value={editForm.anggotaTim} onChange={(e) => setEditForm({ ...editForm, anggotaTim: e.target.value })} /></div>
             <div><Label>Keperluan</Label><Textarea value={editForm.keperluan} onChange={(e) => setEditForm({ ...editForm, keperluan: e.target.value })} rows={2} /></div>
             <div className="grid grid-cols-2 gap-3">
               <div><Label>Tanggal Mulai</Label><Input type="date" value={editForm.startDate} onChange={(e) => setEditForm({ ...editForm, startDate: e.target.value })} /></div>

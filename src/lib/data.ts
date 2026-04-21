@@ -17,6 +17,7 @@ export interface Booking {
   id: string;
   borrowerName: string;
   teamName: string;
+  anggotaTim?: string;
   keperluan: string;
   startDate: string;
   endDate: string;
@@ -70,6 +71,7 @@ function normalizeBooking(booking: Partial<Booking>): Booking {
     id: booking.id || "",
     borrowerName: booking.borrowerName || "",
     teamName: booking.teamName || "",
+    anggotaTim: booking.anggotaTim || "",
     keperluan: booking.keperluan || "",
     startDate: normalizeDate(booking.startDate),
     endDate: normalizeDate(booking.endDate),

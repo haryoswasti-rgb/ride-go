@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { cars, fetchBookingsFromSheet, getBookings, updateBookingStatusOnSheet, type Booking } from "@/lib/data";
 import { FileBarChart, CheckCircle, XCircle, Clock } from "lucide-react";
+import AdminPasswordDialog from "@/components/AdminPasswordDialog";
 
 export default function Report() {
   const { toast } = useToast();
   const [bookings, setBookings] = useState<Booking[]>(getBookings());
+  const [returnAuthDialog, setReturnAuthDialog] = useState(false);
+  const [pendingReturnBooking, setPendingReturnBooking] = useState<Booking | null>(null);
 
   const refreshBookings = async () => {
     const latestBookings = await fetchBookingsFromSheet();
@@ -33,6 +36,18 @@ export default function Report() {
         ? { title: "Berhasil", description: `${resolveCarName(booking)} ditandai sudah kembali` }
         : { title: "Sinkronisasi gagal", description: "Status lokal berubah, tetapi spreadsheet gagal diperbarui", variant: "destructive" }
     );
+  };
+
+  const requestMarkReturned = (booking: Booking) => {
+    setPendingReturnBooking(booking);
+    setReturnAuthDialog(true);
+  };
+
+  const handleReturnVerified = async () => {
+    if (!pendingReturnBooking) return;
+    setReturnAuthDialog(false);
+    await handleMarkReturned(pendingReturnBooking);
+    setPendingReturnBooking(null);
   };
 
   const carUsage = cars.map((car) => ({
@@ -126,7 +141,7 @@ export default function Report() {
                     </td>
                      <td className="p-3">
                        {booking.status === "approved" ? (
-                         <Button size="sm" variant="outline" onClick={() => void handleMarkReturned(booking)}>
+                          <Button size="sm" variant="outline" onClick={() => requestMarkReturned(booking)}>
                            Mobil Sudah Kembali
                          </Button>
                        ) : (
@@ -140,6 +155,16 @@ export default function Report() {
           </table>
         </div>
       </div>
+
+      <AdminPasswordDialog
+        open={returnAuthDialog}
+        onOpenChange={(open) => {
+          setReturnAuthDialog(open);
+          if (!open) setPendingReturnBooking(null);
+        }}
+        onSuccess={() => void handleReturnVerified()}
+        title="Verifikasi Pengembalian Mobil"
+      />
     </div>
   );
 }
